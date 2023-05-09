@@ -4,6 +4,14 @@ import startHover from "./assets/img/start-hover.png";
 import { useEffect, useState } from "react";
 import Taskbar from "./components/Taskbar";
 
+if (
+	(window.screenX! > 1900 && window.screenX! < 1940) ||
+	(window.screenY! > 1060 && window.screenY! < 2000)
+)
+	alert(
+		"This experience is best viewed on a 1080p monitor. Scaling may be non-pixel-perfect."
+	);
+
 function App() {
 	const [mouseInside, setMouseInside] = useState(false);
 	const [dragging, shouldDrag] = useState(false);
