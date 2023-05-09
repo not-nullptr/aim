@@ -84,7 +84,7 @@ body::after {
 	height: 480px;
 	border-radius: 6px 6px 0px 0px;
 	background: linear-gradient(180deg, rgba(37, 98, 223, 1) 0%, rgba(102, 162, 231, 1) 0.5%, rgba(26, 105, 210, 1) 1%, rgba(71, 146, 236, 1) 15%, rgba(70, 145, 235, 1) 80%, rgba(23, 87, 195, 1) 100%);
-	outline: solid thin #225cc5;
+	border: solid thin #225cc5;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
