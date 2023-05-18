@@ -1,8 +1,7 @@
 import "./XP.css";
-import startNeutral from "./assets/img/start-neutral.png";
-import startHover from "./assets/img/start-hover.png";
 import { useEffect, useState } from "react";
 import Taskbar from "./components/Taskbar";
+import WindowBorder from "./components/WindowBorder";
 
 if (
 	(window.screenX! > 1900 && window.screenX! < 1940) ||
@@ -30,8 +29,8 @@ function App() {
 		const mouseInterval = setInterval(() => {
 			if (dragging) {
 				const shouldEvenBother =
-					cursor.style.left !== selection.style.left &&
-					cursor.style.top !== selection.style.top;
+					(cursor.style.left !== selection.style.left &&
+					cursor.style.top !== selection.style.top)
 				selection.style.width = shouldEvenBother
 					? `${(parseInt(selection.style.left.replace("px", "")) - mouseX)
 							.toString()
@@ -99,6 +98,7 @@ function App() {
 				>
 					<div id="cursor" />
 					<div id="selection" />
+					<WindowBorder />
 					<Taskbar />
 				</div>
 			</div>
