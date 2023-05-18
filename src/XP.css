@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/trebuchet-ms-2');
+
 @import url('https://fonts.cdnfonts.com/css/verdana');
 
 #start-button {
@@ -5,12 +7,12 @@
 	width: 97px;
 	height: 30px;
 	image-rendering: pixelated;
-	background-image: url("./assets/img/start-neutral.png");
+	background-image: url("./assets/img/desktop/start-neutral.png");
 }
 
 #cursor {
 	position: fixed;
-	background-image: url("./assets/img/cursor.png");
+	background-image: url("./assets/img/os/cursor.png");
 	width: 12px;
 	height: 21px;
 	z-index: 999;
@@ -19,21 +21,25 @@
 }
 
 #start-button:hover {
-	background-image: url("./assets/img/start-hover.png");
+	background-image: url("./assets/img/desktop/start-hover.png");
 }
 
 .start-button-pressed {
-	background-image: url("./assets/img/start-pressed.png") !important;
+	background-image: url("./assets/img/desktop/start-pressed.png") !important;
 }
 
 #desktop {
+	cursor: none;
 	position: relative;
-	background: url("./assets/img/xp-bg.webp") fixed;
+	background: url("./assets/img/desktop/xp-bg.webp") fixed;
 	background-size: cover;
 	background-position: center;
-	cursor: none;
 	width: 1024px;
 	height: calc(768px - 30px);
+}
+
+#desktop>* {
+	cursor: none;
 }
 
 #bottomOfScreenFixup {
@@ -78,7 +84,7 @@ body::after {
 	height: 0;
 	overflow: hidden;
 	z-index: -1;
-	content: url("./assets/img/cursor.png") url("./assets/img/start-hover.png") url("./assets/img/start-neutral.png") url("./assets/img/start-pressed.png");
+	content: url("./assets/img/os/cursor.png") url("./assets/img/desktop/start-hover.png") url("./assets/img/desktop/start-neutral.png") url("./assets/img/desktop/start-pressed.png");
 }
 
 #startMenu {
@@ -92,7 +98,7 @@ body::after {
 	align-items: center;
 	justify-content: center;
 	position: absolute;
-	bottom: 31px;
+	bottom: 30px;
 }
 
 #startMenuItems {
@@ -129,26 +135,15 @@ body::after {
 	background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='2' stroke-dasharray='1%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
 }
 
-.windowBorder {
-	height: 256px;
-	width: 256px;
-	border-top: none;
-}
-
-.titleBar {
-	border-radius: 8px 8px 0px 0px;
-	width: 100%;
+.handle {
 	height: 28px;
-	background: linear-gradient(180deg, rgba(51, 146, 255, 1) 0%, rgba(0, 85, 232, 1) 19%, rgba(0, 85, 232, 1) 51%, rgba(3, 103, 249, 1) 100%)
+	width: 100%;
+	outline: solid thin #0058ee;
+	background: linear-gradient(180deg, rgba(63, 151, 255, 1) 0%, rgba(43, 144, 255, 1) 4%, rgba(0, 85, 229, 1) 50%, rgba(0, 96, 249, 1) 99%, rgba(0, 70, 224, 1) 100%);
 }
 
-.titleBarText {
-	font-family: 'Verdana';
-}
-
-.windowContent {
-	border: solid 3px #1d55e3;
-	background-color: white;
-	width: calc(100% - 6px);
-	height: calc(100% - 28px);
+.window-name {
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 15pt;
+	color: white;
 }
