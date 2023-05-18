@@ -3,29 +3,18 @@ import { useEffect, useState } from "react";
 import Taskbar from "./components/Taskbar";
 import WindowBorder from "./components/WindowBorder";
 
-function between(n: number, a: number, b: number) {
-	var chk = false;
-	if (a == n && b == n) {
-		chk = true;
-	} else {
-		chk = (n - a) * (n - b) < 0;
-	}
-	return chk;
-}
+if (
+	(window.screenX! > 1900 && window.screenX! < 1940) ||
+	(window.screenY! > 1060 && window.screenY! < 2000)
+)
+	alert(
+		"This experience is best viewed on a 1080p monitor. Scaling may be non-pixel-perfect."
+	);
 
 function App() {
 	const [mouseInside, setMouseInside] = useState(false);
 	const [dragging, shouldDrag] = useState(false);
 	const frameRate = 30;
-	useEffect(() => {
-		if (
-			!between(window.screen.width, 1910, 1930) ||
-			!between(window.screen.height, 1070, 1090)
-		)
-			alert(
-				"This experience is best viewed on a 1080p monitor at 100% zoom. Scaling may not be pixel-perfect."
-			);
-	}, []);
 	useEffect(() => {
 		let [mouseX, mouseY] = [0, 0];
 		const desktop = document.getElementById("desktop") as HTMLDivElement;
@@ -107,7 +96,6 @@ function App() {
 						shouldDrag(false);
 					}}
 				>
-					<WindowBorder />
 					<div id="cursor" />
 					<div id="selection" />
 					<WindowBorder />
