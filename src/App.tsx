@@ -1,7 +1,13 @@
 import "./XP.css";
 import { useEffect, useState } from "react";
 import Taskbar from "./components/Taskbar";
-import WindowBorder from "./components/WindowBorder";
+import Window from "./components/Window";
+import icon from "./assets/img/user/chess.jpg";
+import {
+	initVars,
+	updateMouse,
+	updateSelection,
+} from "./util/lowFramerateHandlers";
 
 if (
 	(window.screenX! > 1900 && window.screenX! < 1940) ||
@@ -12,56 +18,21 @@ if (
 	);
 
 function App() {
-	const [mouseInside, setMouseInside] = useState(false);
 	const [dragging, shouldDrag] = useState(false);
-	const frameRate = 30;
+	const frameRate = 25;
+	const [[mouseX, mouseY], setMousePos] = useState([0, 0]);
 	useEffect(() => {
 		let [mouseX, mouseY] = [0, 0];
-		const desktop = document.getElementById("desktop") as HTMLDivElement;
-		const cursor = document.getElementById("cursor") as HTMLDivElement;
-		const selection = document.getElementById("selection") as HTMLDivElement;
-		desktop.addEventListener("mouseenter", () => setMouseInside(true));
-		desktop.addEventListener("mouseleave", () => setMouseInside(false));
+		const [desktop, cursor, selection] = initVars(mouseX, mouseY);
 		desktop.addEventListener("mousemove", (e) => {
+			setMousePos([e.clientX, e.clientY]);
 			mouseX = e.clientX;
 			mouseY = e.clientY;
 		});
+		document.addEventListener("mousedown", () => console.log("hello, world"));
 		const mouseInterval = setInterval(() => {
-			if (dragging) {
-				const shouldEvenBother =
-					cursor.style.left !== selection.style.left &&
-					cursor.style.top !== selection.style.top;
-				selection.style.width = shouldEvenBother
-					? `${(parseInt(selection.style.left.replace("px", "")) - mouseX)
-							.toString()
-							.replace("-", "")}px`
-					: "0px";
-				selection.style.height = shouldEvenBother
-					? `${(parseInt(selection.style.top.replace("px", "")) - mouseY)
-							.toString()
-							.replace("-", "")}px`
-					: "0px";
-				let transformX = 1;
-				let transformY = 1;
-				if (-(parseInt(selection.style.top.replace("px", "")) - mouseY) < 0) {
-					transformY = -1;
-				}
-				if (-(parseInt(selection.style.left.replace("px", "")) - mouseX) < 0) {
-					transformX = -1;
-				}
-				selection.style.transform = shouldEvenBother
-					? `scale(${transformX}, ${transformY})`
-					: "scale(1)";
-			} else {
-				selection.style.visibility = "hidden";
-				selection.style.left = `0px`;
-				selection.style.top = `0px`;
-				selection.style.width = "0px";
-				selection.style.height = "0px";
-			}
-			if (mouseX === 0 || mouseY === 0) return;
-			cursor.style.left = `${mouseX}px`;
-			cursor.style.top = `${mouseY}px`;
+			updateMouse(mouseX, mouseY, cursor);
+			updateSelection(mouseX, mouseY, dragging, cursor, selection);
 		}, (1 / frameRate) * 1000);
 		return () => {
 			clearInterval(mouseInterval);
@@ -98,7 +69,9 @@ function App() {
 				>
 					<div id="cursor" />
 					<div id="selection" />
-					<WindowBorder />
+					<Window title="Capital Letter Test" icon={icon}>
+						content
+					</Window>
 					<Taskbar />
 				</div>
 			</div>
